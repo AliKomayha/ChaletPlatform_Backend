@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('chalet_id');
+            $table->date('booking_date');
+            $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
+
+            $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('chalet_id')->references('id')->on('chalets')->onDelete('cascade');
             $table->timestamps();
         });
     }
