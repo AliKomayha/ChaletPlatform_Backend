@@ -42,4 +42,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function chalets(){
+        return $this->hasMany(Chalet::class, 'owner_id');
+    }
 }
